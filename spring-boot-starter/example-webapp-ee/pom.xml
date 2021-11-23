@@ -7,8 +7,10 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
-    <camunda.version>7.16.0-ee</camunda.version>
+    <camunda.version>7.15.0-ee</camunda.version>
     <spring.boot.version>2.5.4</spring.boot.version>
+    <spin.version>1.9.0</spin.version>
+    <jaxb.version>2.2.3</jaxb.version>
     <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
   </properties>
 
@@ -28,6 +30,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>org.camunda.spin</groupId>
+        <artifactId>camunda-spin-bom</artifactId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${spin.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -37,12 +46,29 @@
       <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
     </dependency>
     <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.bpm</groupId>
+      <artifactId>camunda-engine-plugin-spin</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.camunda.spin</groupId>
+      <artifactId>camunda-spin-core</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
     </dependency>
     <dependency>
       <groupId>org.glassfish.jaxb</groupId>
       <artifactId>jaxb-runtime</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>${jaxb.version}</version>
     </dependency>
   </dependencies>
 
