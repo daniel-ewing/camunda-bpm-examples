@@ -12,7 +12,7 @@ public class CustomEngineRestApplication extends EngineRestApplication {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> classes = super.getClasses();
-        classes.removeIf(c -> c == JacksonConfigurator.class);
+        classes.removeIf(clazz -> clazz == JacksonConfigurator.class);
         classes.add(CustomJacksonConfigurator.class);
         return classes;
     }
