@@ -2,19 +2,25 @@ package org.camunda.bpm.spring.boot.example.webapp.ee;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.camunda.bpm.engine.rest.impl.CamundaRestResources;
 import org.camunda.bpm.engine.rest.mapper.JacksonConfigurator;
-import org.camunda.bpm.webapp.impl.engine.EngineRestApplication;
+import org.camunda.bpm.spring.boot.starter.rest.CamundaJerseyResourceConfig;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Set;
 
-public class CustomEngineRestApplication extends EngineRestApplication {
+@Configuration
+public class CustomEngineRestApplication extends CamundaJerseyResourceConfig {
 
-    @Override
-    public Set<Class<?>> getClasses() {
-        Set<Class<?>> classes = super.getClasses();
+    protected void registerCamundaRestResources() {
+        Set<Class<?>> classes = CamundaRestResources.getConfigurationClasses();
         classes.removeIf(clazz -> clazz == JacksonConfigurator.class);
         classes.add(CustomJacksonConfigurator.class);
-        return classes;
+        this.registerClasses(classes);
+
+        this.registerClasses(CamundaRestResources.getResourceClasses());
+        this.register(JacksonFeature.class);
     }
 
     private static class CustomJacksonConfigurator extends JacksonConfigurator {

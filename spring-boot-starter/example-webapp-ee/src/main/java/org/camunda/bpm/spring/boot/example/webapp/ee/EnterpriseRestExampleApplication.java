@@ -25,8 +25,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.servlet.JerseyApplicationPath;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 
 @SpringBootApplication
@@ -37,14 +35,6 @@ public class EnterpriseRestExampleApplication {
 
   @Autowired
   private RuntimeService runtimeService;
-
-  @Autowired
-  private JerseyApplicationPath applicationPath;
-
-  @Bean
-  public CustomCamundaBpmRestInitializer getCustomInitializer() {
-    return new CustomCamundaBpmRestInitializer(applicationPath);
-  }
 
   @EventListener
   public void onPostDeploy(PostDeployEvent event) {
